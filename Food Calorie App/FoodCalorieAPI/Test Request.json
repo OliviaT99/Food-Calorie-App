@@ -1,0 +1,20 @@
+{
+  "name": "Test Request",
+  "request": {
+    "type": "http",
+    "url": "{{BaseURL}}/hello",
+    "scripts": {
+      "preRequest": "",
+      "postResponse": ""
+    },
+    "method": "GET",
+    "queryParams": [],
+    "headers": [],
+    "body": "",
+    "contentType": "text/plain",
+    "auth": {
+      "currentAuthType": "INHERIT",
+      "authConfigStore": {}
+    }
+  }
+}

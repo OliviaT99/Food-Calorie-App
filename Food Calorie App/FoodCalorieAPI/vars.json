@@ -1,0 +1,8 @@
+{
+  "BaseURL": {
+    "value": "http://localhost:5001",
+    "type": "string",
+    "id": 0,
+    "isSecret": false
+  }
+}
