@@ -423,10 +423,12 @@ export default function App() {
       });
       fd.append("audio", audioFile);
 
-      const res = await fetch(`${API_URL}/analyze`, {
+      const res = await fetch(`${API_URL}/api/analysis/analyze`, {
         method: "POST",
         body: fd,
       });
+
+      fd.append("userId", "demo-user-1");
 
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
