@@ -9,19 +9,31 @@ from pathlib import Path
 # -----------------------------
 # Paths / Models
 # -----------------------------
-CHECKPOINT_DIR = Path("checkpoints/epoch_1")
 BASE_MODEL = "facebook/mask2former-swin-small-ade-semantic"
+CHECKPOINT_DIR = Path(__file__).parent / "model" / "checkpoints" / "epoch_1"
 
 
 def load_model():
+    """Load local checkpoint if available, otherwise use HF pretrained model."""
     processor = Mask2FormerImageProcessor.from_pretrained(BASE_MODEL)
-    model = Mask2FormerForUniversalSegmentation.from_pretrained(
-        CHECKPOINT_DIR,
-        ignore_mismatched_sizes=True,
-    )
+
+    if CHECKPOINT_DIR.exists():
+        try:
+            model = Mask2FormerForUniversalSegmentation.from_pretrained(
+                CHECKPOINT_DIR,
+                ignore_mismatched_sizes=True
+            )
+            print(f"[INFO] Loaded local checkpoint from {CHECKPOINT_DIR}")
+        except Exception as e:
+            print(f"[WARNING] Failed to load local checkpoint: {e}")
+            print("[INFO] Falling back to Hugging Face pretrained model...")
+            model = Mask2FormerForUniversalSegmentation.from_pretrained(BASE_MODEL)
+    else:
+        print(f"[INFO] Local checkpoint not found. Using Hugging Face pretrained model.")
+        model = Mask2FormerForUniversalSegmentation.from_pretrained(BASE_MODEL)
+
     model.eval()
     return processor, model
-
 
 # -----------------------------
 # Plate + grams estimation MVP
@@ -85,9 +97,7 @@ def estimate_plate_type(area_ratio_by_label: dict) -> str:
 def grams_from_segmentation(seg_np: np.ndarray, id2label: dict) -> dict:
     unique, counts = np.unique(seg_np, return_counts=True)
     areas = dict(zip(unique.tolist(), counts.tolist()))
-
-    # background raus
-    areas.pop(0, None)
+    areas.pop(0, None)  # remove background
 
     total_food_pixels = sum(areas.values())
     if total_food_pixels == 0:
@@ -99,7 +109,6 @@ def grams_from_segmentation(seg_np: np.ndarray, id2label: dict) -> dict:
             "items": []
         }
 
-    # ratios pro label für plate_type heuristic
     area_ratio_by_label = {}
     for cls_id, px in areas.items():
         label = id2label.get(int(cls_id), "unknown").lower()
@@ -112,15 +121,10 @@ def grams_from_segmentation(seg_np: np.ndarray, id2label: dict) -> dict:
         label = id2label.get(int(cls_id), "unknown").lower()
         ratio = px / total_food_pixels
 
-        # Sauce komplett ignorieren
-        if label == "sauce":
-            continue
-
-        if ratio < MIN_AREA_RATIO_KEEP:
+        if label == "sauce" or ratio < MIN_AREA_RATIO_KEEP:
             continue
 
         area_cm2 = ratio * PLATE_AREA_CM2
-
         density = DENSITY_BY_LABEL.get(label, DEFAULT_DENSITY)
         height = HEIGHT_BY_LABEL.get(label, DEFAULT_HEIGHT)
 
@@ -155,6 +159,9 @@ def grams_from_segmentation(seg_np: np.ndarray, id2label: dict) -> dict:
 
 def predict_grams(image_path: str, top_k: int = 10) -> dict:
     processor, model = load_model()
+    image_path = Path(image_path)
+    if not image_path.exists():
+        raise FileNotFoundError(f"Image not found: {image_path}")
 
     image = Image.open(image_path).convert("RGB")
     inputs = processor(images=image, return_tensors="pt")
@@ -166,24 +173,26 @@ def predict_grams(image_path: str, top_k: int = 10) -> dict:
         outputs, target_sizes=[image.size[::-1]]
     )[0].cpu().numpy()
 
-    with open(CHECKPOINT_DIR / "config.json", "r", encoding="utf-8") as f:
+    # load id2label from local checkpoint if available
+    config_file = CHECKPOINT_DIR / "config.json"
+    if not config_file.exists():
+        raise FileNotFoundError(f"Config file not found: {config_file}")
+
+    with open(config_file, "r", encoding="utf-8") as f:
         config = json.load(f)
     id2label = {int(k): v for k, v in config["id2label"].items()}
 
     out = grams_from_segmentation(seg, id2label)
-
-    # Top-k nur für die Anzeige/Response kürzen
-    out["items"] = out["items"][:top_k]
+    out["items"] = out["items"][:top_k]  # top-k for display
     return out
 
 
 if __name__ == "__main__":
-    image_path = "test_image.png"
+    image_path = Path(__file__).parent / "model" / "test_image.png"
     out = predict_grams(image_path, top_k=10)
 
     print("Plate type:", out["plate_type"])
-    print("Top erkannte Lebensmittel (mit Gramm-Schätzung):")
+    print("Top detected foods:")
     for r in out["items"]:
         print(f"- {r['label']}: {r['grams_est']:.1f} g | ratio={r['area_ratio']:.3f} | px={r['pixel_count']}")
-
     print(f"TOTAL: {out['total_grams_est']:.1f} g")
