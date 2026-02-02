@@ -2,18 +2,16 @@
 Inference adapter for backend consumption.
 Loads Mask2Former once and exposes analyze_food().
 """
-
 import json
 from pathlib import Path
 from PIL import Image
 import torch
-
 from transformers import (
     Mask2FormerForUniversalSegmentation,
     Mask2FormerImageProcessor
 )
 
-from ml_service.predict import grams_from_segmentation
+from .predict import grams_from_segmentation
 
 # -----------------------------
 # Paths
@@ -23,22 +21,53 @@ CHECKPOINT_DIR = MODEL_DIR / "checkpoints" / "epoch_1"
 BASE_MODEL = "facebook/mask2former-swin-small-ade-semantic"
 
 # -----------------------------
-# Global model (loaded once)
+# Global model (loaded lazily)
 # -----------------------------
-processor = Mask2FormerImageProcessor.from_pretrained(BASE_MODEL)
-model = Mask2FormerForUniversalSegmentation.from_pretrained(
-    CHECKPOINT_DIR,
-    ignore_mismatched_sizes=True,
-)
-model.eval()
+_processor = None
+_model = None
+_ID2LABEL = None
 
-# -----------------------------
-# Load labels once
-# -----------------------------
-with open(CHECKPOINT_DIR / "config.json", "r", encoding="utf-8") as f:
-    config = json.load(f)
-ID2LABEL = {int(k): v for k, v in config["id2label"].items()}
-
+def _load_model():
+    """Lazy load the model on first use"""
+    global _processor, _model, _ID2LABEL
+    
+    if _model is not None:
+        return  # Already loaded
+    
+    print(f"[INFO] Loading model from {CHECKPOINT_DIR}")
+    
+    try:
+        # Load processor
+        _processor = Mask2FormerImageProcessor.from_pretrained(BASE_MODEL)
+        
+        # Try to load from checkpoint
+        if CHECKPOINT_DIR.exists():
+            _model = Mask2FormerForUniversalSegmentation.from_pretrained(
+                CHECKPOINT_DIR,
+                ignore_mismatched_sizes=True,
+            )
+            print(f"[INFO] Loaded local checkpoint from {CHECKPOINT_DIR}")
+        else:
+            print(f"[WARNING] Checkpoint not found at {CHECKPOINT_DIR}")
+            print("[INFO] Falling back to Hugging Face pretrained model...")
+            _model = Mask2FormerForUniversalSegmentation.from_pretrained(BASE_MODEL)
+        
+        _model.eval()
+        
+        # Load labels
+        config_file = CHECKPOINT_DIR / "config.json"
+        if config_file.exists():
+            with open(config_file, "r", encoding="utf-8") as f:
+                config = json.load(f)
+            _ID2LABEL = {int(k): v for k, v in config["id2label"].items()}
+        else:
+            raise FileNotFoundError(f"Config file not found: {config_file}")
+            
+        print("[INFO] Model loaded successfully!")
+        
+    except Exception as e:
+        print(f"[ERROR] Failed to load model: {e}")
+        raise
 
 # -----------------------------
 # Public API
@@ -46,30 +75,22 @@ ID2LABEL = {int(k): v for k, v in config["id2label"].items()}
 def analyze_food(image_path: str, top_k: int = 10) -> dict:
     """
     Backend-facing inference function.
-
-    Returns:
-    {
-      "plate_type": "flat",
-      "total_grams": 742.3,
-      "items": [
-        { "name": "pasta", "grams": 520.1 },
-        { "name": "cheese", "grams": 222.2 }
-      ]
-    }
     """
-
+    # Load model on first call
+    _load_model()
+    
     image = Image.open(image_path).convert("RGB")
-    inputs = processor(images=image, return_tensors="pt")
-
+    inputs = _processor(images=image, return_tensors="pt")
+    
     with torch.no_grad():
-        outputs = model(**inputs)
-
-    seg = processor.post_process_semantic_segmentation(
+        outputs = _model(**inputs)
+    
+    seg = _processor.post_process_semantic_segmentation(
         outputs, target_sizes=[image.size[::-1]]
     )[0].cpu().numpy()
-
-    raw = grams_from_segmentation(seg, ID2LABEL)
-
+    
+    raw = grams_from_segmentation(seg, _ID2LABEL)
+    
     items = [
         {
             "name": r["label"],
@@ -77,7 +98,7 @@ def analyze_food(image_path: str, top_k: int = 10) -> dict:
         }
         for r in raw["items"][:top_k]
     ]
-
+    
     return {
         "plate_type": raw["plate_type"],
         "total_grams": round(raw["total_grams_est"], 1),

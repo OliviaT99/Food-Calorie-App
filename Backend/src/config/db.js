@@ -1,27 +1,34 @@
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
 
 const connectionString = process.env.DATABASE_URL;
+
 if (!connectionString) {
-    console.error('Missing DATABASE_URL environment variable. Set it in a .env file or export it in your shell.');
+    console.error('Missing DATABASE_URL environment variable.');
     process.exit(1);
 }
 
-const pgAdapter = new PrismaPg({ connectionString });
-
 const prisma = new PrismaClient({
-    adapter: pgAdapter,
-    log: process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
+    log: ['error', 'warn'],
 });
 
 const connectDB = async() => {
     try{
-        await prisma.$connect();
-        console.log("Database connected via Prisma");
+        console.log("Attempting to connect to Neon database...");
+        
+        // Add a 10 second timeout
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Database connection timeout after 10 seconds')), 10000)
+        );
+        
+        await Promise.race([prisma.$connect(), timeoutPromise]);
+        
+        console.log("✓ Database connected successfully via Prisma");
     }
     catch(err){
-        console.error("Error connecting to database:", err);
+        console.error("✗ Error connecting to database:");
+        console.error("Message:", err.message);
+        console.error("Full error:", err);
         process.exit(1);
     };
 };
@@ -31,4 +38,3 @@ const disconnectDB = async() => {
 }
 
 export { prisma, connectDB, disconnectDB };
-

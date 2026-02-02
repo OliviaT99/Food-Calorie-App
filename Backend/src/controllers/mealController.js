@@ -9,7 +9,7 @@ import { getCachedNutrition } from '../utils/nutritionCache.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+//const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 /**
  * Fetch nutrition info for a food name using OpenFoodFacts

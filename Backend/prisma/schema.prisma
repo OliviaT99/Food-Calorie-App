@@ -10,43 +10,58 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(uuid())
+  id        String     @id @default(uuid())
   name      String
-  email     String   @unique
+  email     String     @unique
   password  String
-  createdAt DateTime @default(now())
-
+  createdAt DateTime   @default(now())
   meals     Meal[]
+  analyses  Analysis[]
 }
 
 model Meal {
-  id            String   @id @default(uuid())
+  id            String     @id @default(uuid())
   userId        String
   eatenAt       DateTime
-  createdAt     DateTime @default(now())
-
+  createdAt     DateTime   @default(now())
   totalCalories Int?
   imageUrl      String?
   audioUrl      String?
   transcript    String?
-
   user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   items         MealItem[]
 }
 
 model MealItem {
-  id        String   @id @default(uuid())
-  mealId    String
+  id       String @id @default(uuid())
+  mealId   String
+  name     String
+  calories Int?
+  protein  Float?
+  carbs    Float?
+  fat      Float?
+  meal     Meal   @relation(fields: [mealId], references: [id], onDelete: Cascade)
+}
 
-  name      String
-  calories  Int?
-  protein   Float?
-  carbs     Float?
-  fat       Float?
+model Analysis {
+  id            String         @id @default(uuid())
+  userId        String
+  imageUrl      String
+  plateType     String
+  totalGrams    Float
+  createdAt     DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  detectedItems DetectedItem[]
+}
 
-  meal      Meal @relation(fields: [mealId], references: [id], onDelete: Cascade)
+model DetectedItem {
+  id         String   @id @default(uuid())
+  analysisId String
+  name       String
+  grams      Float
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
 }

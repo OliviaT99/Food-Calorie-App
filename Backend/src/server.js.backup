@@ -1,0 +1,38 @@
+console.log("1. Starting imports...");
+import express from "express";
+import { config } from "dotenv";
+import { connectDB, disconnectDB } from "./config/db.js";
+
+console.log("2. Imports complete");
+
+config();
+console.log("3. Config loaded");
+
+const app = express();
+console.log("4. Express app created");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+console.log("5. Middleware configured");
+
+const port = 5001;
+
+const startServer = async () => {
+  console.log("6. startServer called");
+  try {
+    console.log("7. Connecting to DB...");
+    await connectDB();
+    console.log("8. DB connected!");
+    
+    const server = app.listen(port, () => {
+      console.log(`9. ✓ Server running on http://localhost:${port}`);
+    });
+
+  } catch (error) {
+    console.error('Failed:', error.message);
+    process.exit(1);
+  }
+};
+
+console.log("10. Calling startServer...");
+startServer();

@@ -5,7 +5,7 @@ import shutil
 from PIL import Image
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-
+from fastapi import Form
 from ml_service.inference import analyze_food
 
 app = FastAPI(
@@ -35,7 +35,11 @@ def preprocess_image(file_path: str, max_size: int = 512) -> str:
 # Async endpoint
 # -----------------------------
 @app.post("/predict", response_class=JSONResponse)
-async def predict(file: UploadFile = File(...), top_k: int = 10):
+async def predict(
+    file: UploadFile = File(...),
+    userId: str = Form(...),
+    top_k: int = Form(default=10)
+):
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image.")
 
@@ -47,17 +51,18 @@ async def predict(file: UploadFile = File(...), top_k: int = 10):
     finally:
         file.file.close()
 
-    # Downscale image to speed up CPU inference
+    # Downscale image
     preprocessed_path = preprocess_image(tmp_path)
 
-    # Run blocking inference in a separate thread
+    # Run blocking inference in thread
     loop = asyncio.get_event_loop()
     try:
         result = await loop.run_in_executor(executor, analyze_food, preprocessed_path, top_k)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
 
-    return result
+    # Include userId in the response
+    return {"userId": userId, "analysis": result}
 
 # -----------------------------
 # Root endpoint (optional)
