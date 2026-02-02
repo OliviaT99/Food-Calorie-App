@@ -70,3 +70,11 @@ async def predict(
 @app.get("/")
 async def root():
     return {"message": "Welcome to Food Analyzer API. Use /predict endpoint to analyze images."}
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "ok",
+        "service": "ml-food-analyzer"
+    }
+

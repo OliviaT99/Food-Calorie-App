@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { analyzeFood, getAnalysis, getUserAnalyses } from '../controllers/analysisController.js';
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -45,10 +46,12 @@ const router = express.Router();
 // POST /api/analysis - Analyze food image
 router.post('/', upload.single('image'), analyzeFood);
 
-// GET /api/analysis/:id - Get single analysis
-router.get('/:id', getAnalysis);
 
 // GET /api/analysis/user/:userId - Get all analyses for user
 router.get('/user/:userId', getUserAnalyses);
+
+// GET /api/analysis/:id - Get single analysis
+router.get('/:id', getAnalysis);
+
 
 export default router;
