@@ -15,8 +15,9 @@ import {
 /**
  * App configuration
  */
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const USE_BACKEND = false; // set true later
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const USE_BACKEND = true; // ✅ Backend aktiv
+const DEMO_USER_ID = "7001303"; // ✅ deine userId (später ersetzt durch Login)
 
 /**
  * LocalStorage key for meals
@@ -46,6 +47,18 @@ function safeParse(json, fallback) {
  */
 function uid() {
   return `${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+/**
+ * Helpers: robust formatting
+ */
+function fmt0(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? `${n.toFixed(0)}` : "—";
+}
+function fmt1(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? `${n.toFixed(1)}` : "—";
 }
 
 /**
@@ -135,7 +148,12 @@ export default function App() {
   const [entryFat, setEntryFat] = useState("");
 
   /**
-   * Photo + voice capture state (same as before)
+   * NEW: result from backend analysis (for display)
+   */
+  const [lastAnalysis, setLastAnalysis] = useState(null);
+
+  /**
+   * Photo + voice capture state
    */
   const [imageFile, setImageFile] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -224,9 +242,7 @@ export default function App() {
    * Compute dashboard data based on selected range
    */
   const dailyTotals = useMemo(() => computeDailyTotals(meals), [meals]);
-
   const chartDays = useMemo(() => lastNDays(rangeDays), [rangeDays]);
-
   const chartData = useMemo(
     () => fillMissingDays(dailyTotals, chartDays),
     [dailyTotals, chartDays]
@@ -330,8 +346,6 @@ export default function App() {
 
   /**
    * Save a meal (manual macros for now).
-   * Date defaults to today, can be changed.
-   * This will update LocalStorage and the dashboard instantly.
    */
   function saveMeal() {
     setError("");
@@ -362,18 +376,16 @@ export default function App() {
 
     setMeals((prev) => [...prev, meal]);
 
-    // clear only macro inputs (keep photo/voice optional)
     setEntryCalories("");
     setEntryProtein("");
     setEntryCarbs("");
     setEntryFat("");
 
-    // optional: go back to dashboard after save
     setPage("dashboard");
   }
 
   /**
-   * Demo helper: insert sample data for last 7 days (useful for presentations)
+   * Demo helper: insert sample data for last 7 days
    */
   function addSampleWeek() {
     const days = lastNDays(7);
@@ -391,21 +403,19 @@ export default function App() {
 
   function clearAllData() {
     setMeals([]);
+    setLastAnalysis(null);
     localStorage.removeItem(LS_KEY);
   }
 
   /**
-   * Analyze (kept for later; currently blocked)
+   * ✅ Analyze: calls Backend -> which calls ML service
    */
   async function analyze() {
     setError("");
+    setLastAnalysis(null);
 
     if (!imageFile) {
       setError("Please select a plate image first.");
-      return;
-    }
-    if (!audioBlob) {
-      setError("Please record a voice note first.");
       return;
     }
     if (!USE_BACKEND) {
@@ -416,27 +426,34 @@ export default function App() {
     setIsSubmitting(true);
     try {
       const fd = new FormData();
+
+      // Backend expects: image (and optional audio), plus userId
+      fd.append("userId", DEMO_USER_ID);
       fd.append("image", imageFile);
 
-      const audioFile = new File([audioBlob], audioFileName || "voice.webm", {
-        type: audioMime || "audio/webm",
-      });
-      fd.append("audio", audioFile);
+      // audio optional
+      if (audioBlob) {
+        const audioFile = new File([audioBlob], audioFileName || "voice.webm", {
+          type: audioMime || "audio/webm",
+        });
+        fd.append("audio", audioFile);
+      }
 
-      const res = await fetch(`${API_URL}/api/analysis/analyze`, {
+      const res = await fetch("/api/analysis/analyze", {
         method: "POST",
         body: fd,
       });
 
-      fd.append("userId", "demo-user-1");
-
-      if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
-      // Later: you would set macro fields based on backend result:
-      // setEntryCalories(data.total.kcal)
-      // setEntryProtein(data.total.protein_g) ...
-      console.log("Backend result:", data);
+      if (!res.ok) {
+        throw new Error(
+          data?.message || data?.details || data?.error || "Backend error"
+        );
+      }
+
+      // backend response format: { status:'success', data:{ plateType, totalGrams, detectedItems, totals } }
+      setLastAnalysis(data?.data || null);
     } catch (e) {
       setError(e?.message || "Request failed");
     } finally {
@@ -535,11 +552,12 @@ export default function App() {
           entryFat={entryFat}
           setEntryFat={setEntryFat}
           saveMeal={saveMeal}
+          lastAnalysis={lastAnalysis}
         />
       )}
 
       <div style={styles.footer}>
-        Backend URL (later): <code>{API_URL}</code>
+        API URL: <code>{API_URL}</code> | userId: <code>{DEMO_USER_ID}</code>
       </div>
     </div>
   );
@@ -547,7 +565,6 @@ export default function App() {
 
 /**
  * Dashboard screen component
- * - shows averages + charts for the selected time range
  */
 function Dashboard({
   rangeDays,
@@ -603,7 +620,12 @@ function Dashboard({
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Line type="monotone" dataKey="calories" strokeWidth={3} dot={false} />
+                <Line
+                  type="monotone"
+                  dataKey="calories"
+                  strokeWidth={3}
+                  dot={false}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -636,8 +658,6 @@ function Dashboard({
 
 /**
  * New entry screen component
- * - photo upload + voice recording
- * - manual macro input to save meals without backend
  */
 function NewEntry({
   USE_BACKEND,
@@ -664,13 +684,16 @@ function NewEntry({
   entryFat,
   setEntryFat,
   saveMeal,
+  lastAnalysis,
 }) {
+  const totals = lastAnalysis?.totals || null;
+
   return (
     <div style={styles.content}>
       <div style={styles.sectionHeader}>
         <h2 style={styles.h2}>New Meal Entry</h2>
         <div style={{ color: "#6B7280", fontSize: 13 }}>
-          Until backend is ready, you can save meals manually.
+          Backend analysis is enabled. You can still save meals manually.
         </div>
       </div>
 
@@ -691,7 +714,7 @@ function NewEntry({
           </div>
 
           <div style={styles.field}>
-            <label style={styles.label}>2) Voice note</label>
+            <label style={styles.label}>2) Voice note (optional)</label>
             <div style={styles.row}>
               {!isRecording ? (
                 <button onClick={startRecording} style={styles.primaryBtn}>
@@ -727,11 +750,7 @@ function NewEntry({
               cursor: !USE_BACKEND || isSubmitting ? "not-allowed" : "pointer",
             }}
           >
-            {!USE_BACKEND
-              ? "Backend not ready"
-              : isSubmitting
-              ? "Analyzing…"
-              : "Analyze"}
+            {isSubmitting ? "Analyzing…" : "Analyze"}
           </button>
 
           {!USE_BACKEND && (
@@ -741,6 +760,36 @@ function NewEntry({
           )}
 
           {error && <div style={styles.errorBox}>{error}</div>}
+
+          {lastAnalysis && (
+            <div style={{ marginTop: 14 }}>
+              <div style={{ fontWeight: 900, marginBottom: 6 }}>
+                Last analysis (from backend)
+              </div>
+
+              <div style={styles.hint}>
+                Plate: <b>{lastAnalysis.plateType}</b> — Total grams:{" "}
+                <b>{fmt1(lastAnalysis.totalGrams)} g</b>
+                {" "}— Calories:{" "}
+                <b>{fmt0(totals?.calories)} kcal</b>
+                {" "}— P/C/F:{" "}
+                <b>
+                  {fmt1(totals?.protein)}g / {fmt1(totals?.carbs)}g /{" "}
+                  {fmt1(totals?.fat)}g
+                </b>
+              </div>
+
+              <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+                {(lastAnalysis.detectedItems || []).map((it, idx) => (
+                  <li key={idx}>
+                    <b>{it.name}</b>: {fmt1(it.grams)} g —{" "}
+                    {fmt0(it.calories)} kcal — P/C/F:{" "}
+                    {fmt1(it.protein)}g / {fmt1(it.carbs)}g / {fmt1(it.fat)}g
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div style={styles.card}>
@@ -815,8 +864,7 @@ function NewEntry({
           </button>
 
           <div style={styles.hint}>
-            Saved meals are automatically assigned to the selected date (default: today)
-            and appear in the dashboard instantly.
+            Saved meals appear in the dashboard instantly (LocalStorage).
           </div>
         </div>
       </div>
@@ -1087,8 +1135,6 @@ const styles = {
     borderRadius: 12,
     fontSize: 13,
   },
-
-  placeholder: { color: "#6B7280", lineHeight: 1.4 },
 
   footer: { marginTop: 18, fontSize: 12, color: "#6B7280" },
 };
