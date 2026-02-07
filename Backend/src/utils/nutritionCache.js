@@ -1,8 +1,11 @@
-// Simple in-memory cache for nutrition data
+import fetch from 'node-fetch';
+
+// Simple in-memory cache for nutrition data (per 100g)
 const nutritionCache = new Map();
 
 /**
- * Check cache first; if missing, fetch nutrition info from OpenFoodFacts
+ * Returns nutrition values PER 100g:
+ * { calories, protein, carbs, fat }
  */
 export const getCachedNutrition = async (foodName) => {
   const key = foodName.toLowerCase().trim();
@@ -10,7 +13,6 @@ export const getCachedNutrition = async (foodName) => {
     return nutritionCache.get(key);
   }
 
-  // Fetch from OpenFoodFacts
   try {
     const query = encodeURIComponent(foodName);
     const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${query}&search_simple=1&json=1&page_size=1`;
@@ -27,7 +29,6 @@ export const getCachedNutrition = async (foodName) => {
       fat: product.nutriments['fat_100g'] ?? null,
     };
 
-    // Save in cache
     nutritionCache.set(key, nutr);
     return nutr;
   } catch (err) {

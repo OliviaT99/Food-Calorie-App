@@ -1,0 +1,206 @@
+[2026-02-07T13:14:45.564Z] === Starting Audio Analysis Evaluation ===
+
+[2026-02-07T13:14:45.572Z] Loaded 20 annotations from CSV
+
+[2026-02-07T13:14:45.572Z] 
+[1/20] Processing audio_01...
+[2026-02-07T13:14:45.572Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_01.wav
+[2026-02-07T13:17:45.588Z]   Ground Truth: apple
+[2026-02-07T13:17:45.589Z]   Predicted: 
+[2026-02-07T13:17:45.589Z] 
+[2/20] Processing audio_02...
+[2026-02-07T13:17:45.589Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_02.wav
+[2026-02-07T13:20:45.639Z]   Ground Truth: banana
+[2026-02-07T13:20:45.642Z]   Predicted: 
+[2026-02-07T13:20:45.642Z] 
+[3/20] Processing audio_03...
+[2026-02-07T13:20:45.642Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_03.wav
+[2026-02-07T13:23:45.687Z]   Ground Truth: pasta
+[2026-02-07T13:23:45.690Z]   Predicted: 
+[2026-02-07T13:23:45.692Z] 
+[4/20] Processing audio_04...
+[2026-02-07T13:23:45.693Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_04.wav
+[2026-02-07T14:23:54.443Z] === Starting Audio Analysis Evaluation ===
+
+[2026-02-07T14:23:54.454Z] Loaded 20 annotations from CSV
+
+[2026-02-07T14:23:54.454Z] 
+[1/20] Processing audio_01...
+[2026-02-07T14:23:54.454Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_01.wav
+[2026-02-07T14:26:25.919Z]   Transcript: "I had a novel."
+[2026-02-07T14:26:25.919Z]   Extracted: 
+[2026-02-07T14:26:25.919Z]   Ground Truth: apple
+[2026-02-07T14:26:25.919Z]   Predicted: 
+[2026-02-07T14:26:25.919Z] 
+[2/20] Processing audio_02...
+[2026-02-07T14:26:25.919Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_02.wav
+[2026-02-07T14:26:27.530Z]   Transcript: "I ate a banana."
+[2026-02-07T14:26:27.530Z]   Extracted: banana
+[2026-02-07T14:26:27.530Z]   Ground Truth: banana
+[2026-02-07T14:26:27.530Z]   Predicted: banana
+[2026-02-07T14:26:27.531Z] 
+[3/20] Processing audio_03...
+[2026-02-07T14:26:27.531Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_03.wav
+[2026-02-07T14:26:28.187Z]   Transcript: "For lunch I had pasta."
+[2026-02-07T14:26:28.187Z]   Extracted: pasta
+[2026-02-07T14:26:28.187Z]   Ground Truth: pasta
+[2026-02-07T14:26:28.187Z]   Predicted: pasta
+[2026-02-07T14:26:28.187Z] 
+[4/20] Processing audio_04...
+[2026-02-07T14:26:28.187Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_04.wav
+[2026-02-07T14:26:29.170Z]   Transcript: "I had pasta with cheese."
+[2026-02-07T14:26:29.170Z]   Extracted: pasta, cheese
+[2026-02-07T14:26:29.171Z]   Ground Truth: pasta, cheese
+[2026-02-07T14:26:29.171Z]   Predicted: pasta, cheese
+[2026-02-07T14:26:29.171Z] 
+[5/20] Processing audio_05...
+[2026-02-07T14:26:29.171Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_05.wav
+[2026-02-07T14:26:30.095Z]   Transcript: "I ate chicken rice."
+[2026-02-07T14:26:30.095Z]   Extracted: chicken rice
+[2026-02-07T14:26:30.095Z]   Ground Truth: chicken, rice
+[2026-02-07T14:26:30.095Z]   Predicted: chicken rice
+[2026-02-07T14:26:30.095Z] 
+[6/20] Processing audio_06...
+[2026-02-07T14:26:30.095Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_06.wav
+[2026-02-07T14:26:30.805Z]   Transcript: "I had pizza."
+[2026-02-07T14:26:30.806Z]   Extracted: pizza
+[2026-02-07T14:26:30.806Z]   Ground Truth: pizza
+[2026-02-07T14:26:30.806Z]   Predicted: pizza
+[2026-02-07T14:26:30.806Z] 
+[7/20] Processing audio_07...
+[2026-02-07T14:26:30.806Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_07.wav
+[2026-02-07T14:26:31.626Z]   Transcript: "I help pizza and salad."
+[2026-02-07T14:26:31.627Z]   Extracted: pizza, salad
+[2026-02-07T14:26:31.627Z]   Ground Truth: pizza, salad
+[2026-02-07T14:26:31.627Z]   Predicted: pizza, salad
+[2026-02-07T14:26:31.627Z] 
+[8/20] Processing audio_08...
+[2026-02-07T14:26:31.627Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_08.wav
+[2026-02-07T14:26:32.344Z]   Transcript: "For dinner I ate chicken."
+[2026-02-07T14:26:32.344Z]   Extracted: chicken
+[2026-02-07T14:26:32.344Z]   Ground Truth: chicken
+[2026-02-07T14:26:32.344Z]   Predicted: chicken
+[2026-02-07T14:26:32.344Z] 
+[9/20] Processing audio_09...
+[2026-02-07T14:26:32.345Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_09.wav
+[2026-02-07T14:26:33.093Z]   Transcript: "I had rice."
+[2026-02-07T14:26:33.093Z]   Extracted: rice
+[2026-02-07T14:26:33.093Z]   Ground Truth: rice
+[2026-02-07T14:26:33.093Z]   Predicted: rice
+[2026-02-07T14:26:33.093Z] 
+[10/20] Processing audio_10...
+[2026-02-07T14:26:33.093Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_10.wav
+[2026-02-07T14:26:33.778Z]   Transcript: "I ate bread with cheese."
+[2026-02-07T14:26:33.778Z]   Extracted: bread, cheese
+[2026-02-07T14:26:33.778Z]   Ground Truth: bread, cheese
+[2026-02-07T14:26:33.778Z]   Predicted: bread, cheese
+[2026-02-07T14:26:33.778Z] 
+[11/20] Processing audio_11...
+[2026-02-07T14:26:33.778Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_11.wav
+[2026-02-07T14:26:34.494Z]   Transcript: "I had a salad."
+[2026-02-07T14:26:34.494Z]   Extracted: salad
+[2026-02-07T14:26:34.494Z]   Ground Truth: salad
+[2026-02-07T14:26:34.494Z]   Predicted: salad
+[2026-02-07T14:26:34.494Z] 
+[12/20] Processing audio_12...
+[2026-02-07T14:26:34.494Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_12.wav
+[2026-02-07T14:26:35.176Z]   Transcript: "I ate chicken rice and salad."
+[2026-02-07T14:26:35.176Z]   Extracted: chicken rice, salad
+[2026-02-07T14:26:35.176Z]   Ground Truth: chicken, rice, salad
+[2026-02-07T14:26:35.176Z]   Predicted: chicken rice, salad
+[2026-02-07T14:26:35.176Z] 
+[13/20] Processing audio_13...
+[2026-02-07T14:26:35.176Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_13.wav
+[2026-02-07T14:26:36.029Z]   Transcript: "I just had an apple in the banana."
+[2026-02-07T14:26:36.029Z]   Extracted: apple, banana
+[2026-02-07T14:26:36.029Z]   Ground Truth: apple, banana
+[2026-02-07T14:26:36.029Z]   Predicted: apple, banana
+[2026-02-07T14:26:36.029Z] 
+[14/20] Processing audio_14...
+[2026-02-07T14:26:36.030Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_14.wav
+[2026-02-07T14:26:37.050Z]   Transcript: "I ate pasta and salad."
+[2026-02-07T14:26:37.050Z]   Extracted: pasta, salad
+[2026-02-07T14:26:37.050Z]   Ground Truth: pasta, salad
+[2026-02-07T14:26:37.050Z]   Predicted: pasta, salad
+[2026-02-07T14:26:37.050Z] 
+[15/20] Processing audio_15...
+[2026-02-07T14:26:37.050Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_15.wav
+[2026-02-07T14:26:37.691Z]   Transcript: "I had bread."
+[2026-02-07T14:26:37.692Z]   Extracted: bread
+[2026-02-07T14:26:37.692Z]   Ground Truth: bread
+[2026-02-07T14:26:37.692Z]   Predicted: bread
+[2026-02-07T14:26:37.692Z] 
+[16/20] Processing audio_16...
+[2026-02-07T14:26:37.692Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_16.wav
+[2026-02-07T14:26:38.386Z]   Transcript: "I have cheese."
+[2026-02-07T14:26:38.386Z]   Extracted: cheese
+[2026-02-07T14:26:38.386Z]   Ground Truth: cheese
+[2026-02-07T14:26:38.386Z]   Predicted: cheese
+[2026-02-07T14:26:38.386Z] 
+[17/20] Processing audio_17...
+[2026-02-07T14:26:38.387Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_17.wav
+[2026-02-07T14:26:39.103Z]   Transcript: "A8 pizza with cheese"
+[2026-02-07T14:26:39.104Z]   Extracted: a8 pizza, cheese
+[2026-02-07T14:26:39.104Z]   Ground Truth: pizza, cheese
+[2026-02-07T14:26:39.104Z]   Predicted: a8 pizza, cheese
+[2026-02-07T14:26:39.104Z] 
+[18/20] Processing audio_18...
+[2026-02-07T14:26:39.104Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_18.wav
+[2026-02-07T14:26:39.824Z]   Transcript: "For lunch, I had chicken and pasta."
+[2026-02-07T14:26:39.824Z]   Extracted: chicken, pasta
+[2026-02-07T14:26:39.824Z]   Ground Truth: chicken, pasta
+[2026-02-07T14:26:39.824Z]   Predicted: chicken, pasta
+[2026-02-07T14:26:39.824Z] 
+[19/20] Processing audio_19...
+[2026-02-07T14:26:39.824Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_19.wav
+[2026-02-07T14:26:40.538Z]   Transcript: "I ate rice vegetables."
+[2026-02-07T14:26:40.538Z]   Extracted: rice, vegetables
+[2026-02-07T14:26:40.538Z]   Ground Truth: rice, vegetables
+[2026-02-07T14:26:40.538Z]   Predicted: rice, vegetables
+[2026-02-07T14:26:40.539Z] 
+[20/20] Processing audio_20...
+[2026-02-07T14:26:40.539Z] Calling FastAPI for: /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/audio/audio_20.wav
+[2026-02-07T14:26:41.229Z]   Transcript: "I had a banana and some bread."
+[2026-02-07T14:26:41.229Z]   Extracted: banana, bread
+[2026-02-07T14:26:41.229Z]   Ground Truth: banana, bread
+[2026-02-07T14:26:41.229Z]   Predicted: banana, bread
+[2026-02-07T14:26:41.231Z] 
+✅ Predictions saved to /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/predictions.csv
+[2026-02-07T14:26:41.233Z] 
+==================================================
+[2026-02-07T14:26:41.233Z] --- OVERALL METRICS ---
+[2026-02-07T14:26:41.233Z] ==================================================
+[2026-02-07T14:26:41.233Z] Precision: 100.00%
+[2026-02-07T14:26:41.233Z] Recall:    81.25%
+[2026-02-07T14:26:41.233Z] F1-score:  89.66%
+[2026-02-07T14:26:41.233Z] Accuracy:  97.00%
+[2026-02-07T14:26:41.233Z] 
+Confusion Matrix:
+[2026-02-07T14:26:41.233Z]   True Positives:  26
+[2026-02-07T14:26:41.233Z]   False Positives: 0
+[2026-02-07T14:26:41.233Z]   False Negatives: 6
+[2026-02-07T14:26:41.233Z]   True Negatives:  168
+[2026-02-07T14:26:41.233Z] 
+==================================================
+[2026-02-07T14:26:41.233Z] --- PER-FOOD METRICS ---
+[2026-02-07T14:26:41.233Z] ==================================================
+[2026-02-07T14:26:41.237Z] ┌─────────┬──────────────┬───────────┬─────────┬─────────┬────┬────┬────┐
+│ (index) │ food         │ precision │ recall  │ f1      │ TP │ FP │ FN │
+├─────────┼──────────────┼───────────┼─────────┼─────────┼────┼────┼────┤
+│ 0       │ [32m'apple'[39m      │ [32m'1.000'[39m   │ [32m'0.500'[39m │ [32m'0.667'[39m │ [33m1[39m  │ [33m0[39m  │ [33m1[39m  │
+│ 1       │ [32m'banana'[39m     │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m3[39m  │ [33m0[39m  │ [33m0[39m  │
+│ 2       │ [32m'pasta'[39m      │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m4[39m  │ [33m0[39m  │ [33m0[39m  │
+│ 3       │ [32m'cheese'[39m     │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m4[39m  │ [33m0[39m  │ [33m0[39m  │
+│ 4       │ [32m'chicken'[39m    │ [32m'1.000'[39m   │ [32m'0.500'[39m │ [32m'0.667'[39m │ [33m2[39m  │ [33m0[39m  │ [33m2[39m  │
+│ 5       │ [32m'rice'[39m       │ [32m'1.000'[39m   │ [32m'0.500'[39m │ [32m'0.667'[39m │ [33m2[39m  │ [33m0[39m  │ [33m2[39m  │
+│ 6       │ [32m'pizza'[39m      │ [32m'1.000'[39m   │ [32m'0.667'[39m │ [32m'0.800'[39m │ [33m2[39m  │ [33m0[39m  │ [33m1[39m  │
+│ 7       │ [32m'salad'[39m      │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m4[39m  │ [33m0[39m  │ [33m0[39m  │
+│ 8       │ [32m'bread'[39m      │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m3[39m  │ [33m0[39m  │ [33m0[39m  │
+│ 9       │ [32m'vegetables'[39m │ [32m'1.000'[39m   │ [32m'1.000'[39m │ [32m'1.000'[39m │ [33m1[39m  │ [33m0[39m  │ [33m0[39m  │
+└─────────┴──────────────┴───────────┴─────────┴─────────┴────┴────┴────┘
+[2026-02-07T14:26:46.147Z] 
+✅ Bar chart saved to /Users/oliviat/Documents/Uni/WS25_26/DBSM/Project/evaluation/metrics_chart.png
+[2026-02-07T14:26:46.147Z] 
+⏱️  Total evaluation time: 2.86 minutes
+[2026-02-07T14:26:46.147Z] 
+=== Evaluation Complete ===
