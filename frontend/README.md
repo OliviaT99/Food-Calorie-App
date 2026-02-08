@@ -82,11 +82,13 @@ Linting:
 npm run lint
 How the frontend talks to the backend
 The frontend sends HTTP requests to the backend (base URL configured via VITE_API_URL).
+
 The backend handles authentication, storage, and orchestration of ML inference via ml_service.
+
 The frontend receives structured JSON results and displays them.
 
 Troubleshooting
-Backend not reachable / network error: verify backend is running and VITE_API_URL is correct (backend default port: 5001).
+Backend not reachable / network error: verify the backend is running and VITE_API_URL is correct (backend default port: 5001).
 
 CORS issues: ensure the backend allows requests from the frontend origin (Vite dev server).
 
@@ -100,4 +102,5 @@ Limited automated test coverage
 Local development assumes the backend is available locally
 
 License / usage
-This frontend is part of a university project and intended for academic and educational use
+This frontend is part of a university project and intended for academic and educational use.
+
