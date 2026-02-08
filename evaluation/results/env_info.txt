@@ -1,0 +1,9 @@
+timestamp: 2026-02-07 18:09:06
+device: cpu
+torch: 2.10.0+cpu
+cuda_available: False
+baseline_name: facebook/mask2former-swin-small-ade-semantic
+finetuned_dir: C:\Users\Leoni\Athlete_nutrition_final\Food-Calorie-App\ml_service\model\checkpoints\epoch_1
+split: validation
+max_samples: 200
+ignore_index: 0

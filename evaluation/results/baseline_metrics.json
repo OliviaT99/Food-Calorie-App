@@ -1,0 +1,951 @@
+{
+  "iou_metrics": {
+    "mean_iou": 0.0007013331569840169,
+    "mean_accuracy": 0.011771783648451625,
+    "overall_accuracy": 0.020011550690809156,
+    "per_category_iou": [
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001536723163841808,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.030673545252791968,
+      0.0,
+      0.002642464348258503,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.025452131535061446,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      6.903768017689351e-05,
+      0.00021173059905282225,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0011316852354100407,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "per_category_accuracy": [
+      NaN,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0016050606618514846,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.8480103913771004,
+      0.0,
+      0.0027414882652018594,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      NaN,
+      0.04560145622970912,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0069565790775114565,
+      0.0002133557022502644,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0012990096171505104,
+      0.0,
+      0.0,
+      0.0,
+      NaN,
+      0.0,
+      NaN,
+      NaN,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "prf_metrics": {
+    "macro_precision": 0.0021761070185227797,
+    "macro_recall": 0.008800265445929855,
+    "macro_f1": 0.001168195518980274,
+    "micro_precision": 0.022422805446680447,
+    "micro_recall": 0.020011550690809156,
+    "micro_f1": 0.021148670495790545,
+    "overall_accuracy_no_bg": 0.022422805446680447,
+    "per_class": {
+      "1": {
+        "label": "candy",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "2": {
+        "label": "egg tart",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "3": {
+        "label": "french fries",
+        "support_pixels": 390361.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "4": {
+        "label": "chocolate",
+        "support_pixels": 40166.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "5": {
+        "label": "biscuit",
+        "support_pixels": 326064.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "6": {
+        "label": "popcorn",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "7": {
+        "label": "pudding",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "8": {
+        "label": "ice cream",
+        "support_pixels": 728530.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "9": {
+        "label": "cheese butter",
+        "support_pixels": 402972.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "10": {
+        "label": "cake",
+        "support_pixels": 459312.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "11": {
+        "label": "wine",
+        "support_pixels": 18241.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "12": {
+        "label": "milkshake",
+        "support_pixels": 321838.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "13": {
+        "label": "coffee",
+        "support_pixels": 91370.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "14": {
+        "label": "juice",
+        "support_pixels": 35758.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "15": {
+        "label": "milk",
+        "support_pixels": 13173.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "16": {
+        "label": "tea",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "17": {
+        "label": "almond",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "18": {
+        "label": "red beans",
+        "support_pixels": 106687.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "19": {
+        "label": "cashew",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "20": {
+        "label": "dried cranberries",
+        "support_pixels": 9614.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "21": {
+        "label": "soy",
+        "support_pixels": 11987.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "22": {
+        "label": "walnut",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "23": {
+        "label": "peanut",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "24": {
+        "label": "egg",
+        "support_pixels": 483542.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "25": {
+        "label": "apple",
+        "support_pixels": 72212.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "26": {
+        "label": "date",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "27": {
+        "label": "apricot",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "28": {
+        "label": "avocado",
+        "support_pixels": 153918.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "29": {
+        "label": "banana",
+        "support_pixels": 111086.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "30": {
+        "label": "strawberry",
+        "support_pixels": 304694.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "31": {
+        "label": "cherry",
+        "support_pixels": 21183.0,
+        "precision": 0.03483606557377049,
+        "recall": 0.0016050606618514846,
+        "f1": 0.003068730538381696
+      },
+      "32": {
+        "label": "blueberry",
+        "support_pixels": 53150.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "33": {
+        "label": "raspberry",
+        "support_pixels": 27604.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "34": {
+        "label": "mango",
+        "support_pixels": 12149.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "35": {
+        "label": "olives",
+        "support_pixels": 82499.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "36": {
+        "label": "peach",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "37": {
+        "label": "lemon",
+        "support_pixels": 371399.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "38": {
+        "label": "pear",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "39": {
+        "label": "fig",
+        "support_pixels": 20780.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "40": {
+        "label": "pineapple",
+        "support_pixels": 10901.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "41": {
+        "label": "grape",
+        "support_pixels": 68638.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "42": {
+        "label": "kiwi",
+        "support_pixels": 19093.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "43": {
+        "label": "melon",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "44": {
+        "label": "orange",
+        "support_pixels": 71786.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "45": {
+        "label": "watermelon",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "46": {
+        "label": "steak",
+        "support_pixels": 1640991.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "47": {
+        "label": "pork",
+        "support_pixels": 1898568.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "48": {
+        "label": "chicken duck",
+        "support_pixels": 2367636.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "49": {
+        "label": "sausage",
+        "support_pixels": 160532.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "50": {
+        "label": "fried meat",
+        "support_pixels": 455213.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "51": {
+        "label": "lamb",
+        "support_pixels": 84596.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "52": {
+        "label": "sauce",
+        "support_pixels": 701969.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "53": {
+        "label": "crab",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "54": {
+        "label": "fish",
+        "support_pixels": 699811.0,
+        "precision": 0.030843109722559253,
+        "recall": 0.8480103913771004,
+        "f1": 0.05952135939468343
+      },
+      "55": {
+        "label": "shellfish",
+        "support_pixels": 506602.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "56": {
+        "label": "shrimp",
+        "support_pixels": 895499.0,
+        "precision": 0.06816982756226918,
+        "recall": 0.0027414882652018594,
+        "f1": 0.005271000266233822
+      },
+      "57": {
+        "label": "soup",
+        "support_pixels": 312177.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "58": {
+        "label": "bread",
+        "support_pixels": 2562899.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "59": {
+        "label": "corn",
+        "support_pixels": 552389.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "60": {
+        "label": "hamburg",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "61": {
+        "label": "pizza",
+        "support_pixels": 14579.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "62": {
+        "label": " hanamaki baozi",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "63": {
+        "label": "wonton dumplings",
+        "support_pixels": 413671.0,
+        "precision": 0.054465293677764336,
+        "recall": 0.04560145622970912,
+        "f1": 0.04964079892634404
+      },
+      "64": {
+        "label": "pasta",
+        "support_pixels": 950003.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "65": {
+        "label": "noodles",
+        "support_pixels": 104964.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "66": {
+        "label": "rice",
+        "support_pixels": 894029.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "67": {
+        "label": "pie",
+        "support_pixels": 1671823.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "68": {
+        "label": "tofu",
+        "support_pixels": 4087.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "69": {
+        "label": "eggplant",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "70": {
+        "label": "potato",
+        "support_pixels": 942104.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "71": {
+        "label": "garlic",
+        "support_pixels": 62033.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "72": {
+        "label": "cauliflower",
+        "support_pixels": 24518.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "73": {
+        "label": "tomato",
+        "support_pixels": 1104489.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "74": {
+        "label": "kelp",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "75": {
+        "label": "seaweed",
+        "support_pixels": 6776.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "76": {
+        "label": "spring onion",
+        "support_pixels": 82014.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "77": {
+        "label": "rape",
+        "support_pixels": 296114.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "78": {
+        "label": "ginger",
+        "support_pixels": 3473.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "79": {
+        "label": "okra",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "80": {
+        "label": "lettuce",
+        "support_pixels": 359828.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "81": {
+        "label": "pumpkin",
+        "support_pixels": 30331.0,
+        "precision": 6.972482157385114e-05,
+        "recall": 0.0069565790775114565,
+        "f1": 0.00013806582860926815
+      },
+      "82": {
+        "label": "cucumber",
+        "support_pixels": 548380.0,
+        "precision": 0.027045769764216365,
+        "recall": 0.0002133557022502644,
+        "f1": 0.00042337155739217595
+      },
+      "83": {
+        "label": "white radish",
+        "support_pixels": 29928.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "84": {
+        "label": "carrot",
+        "support_pixels": 715872.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "85": {
+        "label": "asparagus",
+        "support_pixels": 140858.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "86": {
+        "label": "bamboo shoots",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "87": {
+        "label": "broccoli",
+        "support_pixels": 1344877.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "88": {
+        "label": "celery stick",
+        "support_pixels": 225362.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "89": {
+        "label": "cilantro mint",
+        "support_pixels": 377322.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "90": {
+        "label": "snow peas",
+        "support_pixels": 10008.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "91": {
+        "label": " cabbage",
+        "support_pixels": 90225.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "92": {
+        "label": "bean sprouts",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "93": {
+        "label": "onion",
+        "support_pixels": 223247.0,
+        "precision": 0.008709231785692835,
+        "recall": 0.0012990096171505104,
+        "f1": 0.0022608119433237834
+      },
+      "94": {
+        "label": "pepper",
+        "support_pixels": 343501.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "95": {
+        "label": "green beans",
+        "support_pixels": 140521.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "96": {
+        "label": "French beans",
+        "support_pixels": 586756.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "97": {
+        "label": "king oyster mushroom",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "98": {
+        "label": "shiitake",
+        "support_pixels": 260923.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "99": {
+        "label": "enoki mushroom",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "100": {
+        "label": "oyster mushroom",
+        "support_pixels": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "101": {
+        "label": "white button mushroom",
+        "support_pixels": 48133.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "102": {
+        "label": "salad",
+        "support_pixels": 4261.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "103": {
+        "label": "other ingredients",
+        "support_pixels": 1018540.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

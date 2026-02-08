@@ -16,3 +16,6 @@ __pycache__/
 *.pyc
 Backend/FoodSeg_mask2former/tb_logs/
 Backend/FoodSeg_mask2former/.gradio/
+# local venv
+.venv_eval/
+
