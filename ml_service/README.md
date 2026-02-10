@@ -45,21 +45,54 @@ The backend sends image or audio data to `ml_service` and receives structured JS
 ### Image analysis
 
 * **Model**: Mask2Former
-* **Training data**: Fine-tuned on FoodSeg103
-* **Task**: Food segmentation and portion estimation
-* **Training details**:
+* **Architecture source**: `FoodSeg_mask2former` (GitHub, Nima Vahdat)
+* **Base checkpoint**: `facebook/mask2former-swin-small-ade-semantic` (pretrained on ADE20K)
+* **Fine-tuning dataset**: FoodSeg103
+* **Task**: Pixel-wise food segmentation and portion estimation (103 food classes)
 
-  * Trained on a few thousand images
-  * Only one training epoch available
-  * Small test dataset
+**Training and model details**
 
-The image model outputs detected food items and estimated grams per item, which are aggregated into a meal-level analysis.
+The image segmentation pipeline is based on the open-source GitHub repository **FoodSeg_mask2former**. A pretrained Mask2Former checkpoint from Hugging Face (`facebook/mask2former-swin-small-ade-semantic`), originally trained on the ADE20K dataset, is fine-tuned on the **FoodSeg103** dataset using the training scripts provided in the repository.
+
+The resulting FoodSeg103-specific checkpoint is stored in Hugging Face format (`config.json`, `model.safetensors`) and performs pixel-wise food segmentation for all 103 FoodSeg103 classes. The segmentation output is post-processed to derive detected food items and approximate portion sizes (in grams), which are aggregated into a meal-level analysis.
+
+Training was performed on a few thousand images, with **one available training epoch**, reflecting limited training time and computational resources.
+
+**Evaluation (image model)**
+
+Evaluation of the image segmentation model is performed on the validation split of the official FoodSeg103 dataset hosted on Hugging Face (`EduardoPacheco/FoodSeg103`). Due to the limited training regime and dataset size, image evaluation results should be interpreted as indicative and suitable for prototypical system validation rather than production-grade benchmarking.
+
+**Quantitative results (FoodSeg103 validation set)**
+
+* **Mean Intersection over Union (mIoU)**: **0.1369**
+  Average overlap quality between predicted and ground-truth segments per class (standard semantic segmentation metric).
+* **Overall pixel accuracy**: **0.4912**
+  Global pixel-level accuracy across all classes combined; dominated by frequent and visually large classes.
+* **Mean class accuracy**: **0.2130**
+  Average per-class accuracy, reflecting how much of each true class is correctly recovered.
+
+**Qualitative observations**
+
+* **56 out of 103 classes** were not detected at all (no true positives), indicating limited class coverage.
+* Best performance is observed for **frequent, large, and visually distinctive ingredients** (e.g. broccoli, tomato, rice, noodles).
+* Weakest performance occurs for **rare, small, or garnish-like ingredients**, which are underrepresented in the training data.
+
+---
 
 ### Audio analysis
 
 * **Speech-to-text**: Local Whisper model
 * **Semantic parsing**: Mistral API (LLM)
 * **Task**: Extract food items and quantities from spoken descriptions
+
+## Evaluation (audio model)
+
+The audio analysis pipeline was evaluated on a small test set of 20 simple recordings:
+
+* Precision: **100.00%**
+* Recall: **81.25%**
+* F1-score: **89.66%**
+* Accuracy: **97.00%**
 
 ---
 
@@ -129,14 +162,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-If `requirements.txt` is unavailable, required libraries include:
-
-* torch, torchvision, torchaudio
-* transformers
-* fastapi, uvicorn
-* gradio
-* pydantic
-
 ---
 
 ## Configuration
@@ -161,46 +186,9 @@ Do **not** commit `.env` files to version control.
 
 ## Running the service
 
-Start the FastAPI server:
-
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 5002
 ```
-
-The service will expose:
-
-* `POST /predict`
-* `POST /analyze-audio`
-
----
-
-## Running inference locally
-
-### Programmatic image inference
-
-```python
-from ml_service.predict import predict_from_image
-result = predict_from_image("/path/to/image.jpg")
-```
-
-### Gradio demo (optional)
-
-```bash
-python -m ml_service.gradio_app.app
-```
-
----
-
-## Evaluation (audio model)
-
-The audio analysis pipeline was evaluated on a small test set of 20 simple recordings:
-
-* Precision: **100.00%**
-* Recall: **81.25%**
-* F1-score: **89.66%**
-* Accuracy: **97.00%**
-
-Evaluation scripts and results are stored in a separate evaluation folder.
 
 ---
 
@@ -216,18 +204,10 @@ Evaluation scripts and results are stored in a separate evaluation folder.
 
 * Image model trained on a limited dataset
 * Only one training epoch available
-* Small test dataset for image evaluation
+* Small validation dataset for image evaluation
 * Not optimized for production-scale throughput
 
 This service is intended as an educational prototype demonstrating ML system integration rather than a fully production-ready solution.
-
----
-
-## Troubleshooting
-
-* **Model load errors**: verify checkpoint paths and compatibility with config
-* **Slow inference**: ensure GPU is available if expected
-* **Dependency issues**: confirm virtual environment is active
 
 ---
 
